@@ -1,0 +1,29 @@
+
+services:
+  app:
+    image: 'jpa101:latest'
+    build:
+      context: .
+    container_name: app
+    depends_on:
+      - db
+    environment:
+      - POSTGRES_USER=
+      - POSTGRES_PASSWORD=root
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/understanding-jpa
+      - SPRING_DATASOURCE_USERNAME=chintu
+      - SPRING_DATASOURCE_PASSWORD=root
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+    ports:
+      - "8080:8080"
+
+  db:
+    image: postgres
+    container_name: db
+    environment:
+      - POSTGRES_USER=chintu
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=understanding-jpa
+    ports:
+      - "5432:5432"
